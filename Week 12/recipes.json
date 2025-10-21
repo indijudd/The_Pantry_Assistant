@@ -1,0 +1,57 @@
+{
+    "Macaroni & Cheese": [
+        "pasta",
+        "cheese",
+        "milk"
+    ],
+    "Grilled Cheese Sandwich": [
+        "bread",
+        "cheese",
+        "butter"
+    ],
+    "Pancakes": [
+        "flour",
+        "milk",
+        "eggs"
+    ],
+    "Scrambled Eggs": [
+        "eggs",
+        "milk",
+        "butter"
+    ],
+    "Omelette": [
+        "eggs",
+        "cheese",
+        "milk"
+    ],
+    "Fruit Salad": [
+        "apple",
+        "banana",
+        "orange",
+        "grapes"
+    ],
+    "BLT Sandwich": [
+        "bacon",
+        "lettuce",
+        "tomato",
+        "bread"
+    ],
+    "Spaghetti": [
+        "pasta",
+        "tomato sauce"
+    ],
+    "Tacos": [
+        "tortilla",
+        "meat",
+        "cheese",
+        "lettuce"
+    ],
+    "Cheese Sticks": [
+        "cheese",
+        "dough"
+    ],
+    "Cheese Quesadillas": [
+        "cheese",
+        "tortilla"
+    ]
+}
