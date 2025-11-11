@@ -1,0 +1,87 @@
+{
+ "Macaroni & Cheese": [
+  "pasta",
+  "cheese",
+  "milk"
+ ],
+ "Pancakes": [
+  "flour",
+  "milk",
+  "eggs"
+ ],
+ "Scrambled Eggs": [
+  "eggs",
+  "milk",
+  "butter"
+ ],
+ "Omelette": [
+  "eggs",
+  "cheese",
+  "milk"
+ ],
+ "BLT Sandwich": [
+  "bacon",
+  "lettuce",
+  "tomato",
+  "bread"
+ ],
+ "Tacos": [
+  "tortilla",
+  "meat",
+  "cheese",
+  "lettuce"
+ ],
+ "Cheese Quesadillas": [
+  "cheese",
+  "tortilla"
+ ],
+ "Lasagna": [
+  "lasagna",
+  "beef mince",
+  "ricotta",
+  "mozzarella",
+  "tomato"
+ ],
+ "Tomato Soup": [
+  "tomato",
+  "onion",
+  "garlic",
+  "vegetable stock",
+  "cream"
+ ],
+ "Chicken Noodle Soup": [
+  "stock",
+  "chicken",
+  "noodles",
+  "carrots",
+  "celery"
+ ],
+ "Greek Salad": [
+  "cucumber",
+  "feta",
+  "tomato",
+  "red onion",
+  "olives"
+ ],
+ "Cottage Pie": [
+  "mince",
+  "potato",
+  "butter",
+  "milk",
+  "onion",
+  "carrot",
+  "celery"
+ ],
+ "Spinach Pesto": [
+  "baby spinach",
+  "garlic",
+  "olive oil",
+  "parmesan",
+  "pasta"
+ ],
+ "Ham & Cheese Croissant": [
+  "ham",
+  "cheese",
+  "croissant"
+ ]
+}

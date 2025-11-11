@@ -1,0 +1,156 @@
+# Recipe Generator
+# The user will input ingredients they have in their pantry and the program will output recipes that can be created with those ingredients
+
+import json
+import os
+
+#store the string value 'recipes.json' (the json file where the users recipes are saved) as the variable 'DATABASE_FILE'
+DATABASE_FILE = "recipes.json"
+
+# Load recipes from the JSON file (or start a new empty recipe database if file doesn't already exist)
+#Define a new function for loading recipes from the database file
+def load_recipes():
+
+    # Use a conditional statement to check whether the recipes.json file exists on the computer (os)
+    if os.path.exists(DATABASE_FILE): #if TRUE complete the following
+        with open(DATABASE_FILE, "r") as file: #open the database file in read mode ("r") and store under the variable 'file'
+            return json.load(file) #convert the JSON data from the file into a python data structure - a dictionary
+
+    else: #if FALSE complete the following
+        return {}  # returns a new empty dictionary which can have recipes added to it
+
+# define a function to save recipes to the database file
+def save_recipes(recipes):
+    with open(DATABASE_FILE, "w") as file: #open the file in write mode ("w") to overwrite the existing file
+        json.dump(recipes, file, indent=1) #convert recipes dictionary into JSON format, indent each recipe onto separate lines for clearer formatting of the JSON file
+
+#----------------------------------- CORE PROGRAM FUNCTIONS --------------------------------------
+
+#----------------------------------- 1. FINDING A RECIPE -----------------------------------------
+
+#The first option will allow the user to find a recipe to cook using available ingredients they have inputed
+
+#Define the function for finding a recipe using available ingredients
+def function_find():
+    recipes = load_recipes() #define the variable 'recipes' to store data from the load_recipes function
+    if not recipes: #conditional statement, if there are NO recipes yet stored from the defined load_recipes function then print the following message:
+        print("\nNo recipes found, try adding some first!") #\n prints on a new line for user readability
+        return #stop running the function and return to title screen
+
+    #Ask the user to enter the ingredients they have and store under the variable 'ingredients'
+    ingredients = input("\nWhat ingredients do you have?: ").lower() #convert the inputed string to lowercase for consistency
+    #convert the inputed string to a list, separating individual ingredients at the comma and removing excess spaces from either side so that it is uniform with the JSON file
+    list_ingredients = [item.strip() for item in ingredients.split(",")]
+
+    #seperate exact matches and partial matches to the database
+    exact_matches = [] #an empty list for exact matches
+    partial_matches = {} #an empty dictionary for partial matches
+
+    #Create a loop which filters each recipe and associated ingredients in the database file
+    for recipe, required in recipes.items(): #recipe = recipe name (string), required = recipe ingredients (list of strings)
+        if all(item in list_ingredients for item in required):
+            exact_matches.append(recipe)
+        else:
+            missing = [item for item in required if item not in list_ingredients]
+            if len(missing) < len(required):
+                partial_matches[recipe] = missing
+
+    if exact_matches:
+        print("\n✅ You can make:")
+        for recipe in exact_matches:
+            print(f" - {recipe}")
+    else:
+        print("\nNo exact matches found.")
+
+    if partial_matches:
+        print("\nYou can almost make these other recipes! You're missing these ingredients:")
+        for recipe, missing in partial_matches.items():
+            print(f" - {recipe}: missing {', '.join(missing)}")
+
+
+#------------------------------------ 2. ADDING NEW RECIPES ------------------------------------------
+
+#The user can add new recipes to the database
+
+#Define the function to add a new recipe to the database as function_add
+def function_add():
+    recipes = load_recipes()
+    recipe_name = input("\nEnter the name of the new recipe: ").strip()
+
+# If recipe name entered already exists in the database, print a message to user saying so
+    if recipe_name in recipes:
+        print("That recipe already exists!")
+        return
+
+#Ask user to input the ingredients in the new recipe, seperated by commas
+    ingredients = input("Enter the ingredients (separated by commas): ").lower() #converts string to lowercase as above
+    ingredient_list = [item.strip() for item in ingredients.split(",")] #splits ingredients into separate items at the comma
+
+#Save the recipe and its ingredients to the database recipe JSON file
+    recipes[recipe_name] = ingredient_list
+    save_recipes(recipes)
+    print(f"\n✅ Recipe '{recipe_name}' added successfully!") #print a message to the user that the relevant recipe has been added
+
+#------------------------------------ 3. VIEW ALL STORED RECIPES  ------------------------------------------
+
+#The recipes in the database can be viewed and the ingredients in them will be listed
+
+#Define the function to view an existing recipe in the database as function_view
+def function_view():
+    recipes = load_recipes()  # Load the JSON data
+
+    # If no recipes exist, let the user know
+    if not recipes:
+        print("\nNo recipes found! Try adding some first.")
+        return
+
+    # Print the list of all recipes
+    print("\nAvailable recipes:")
+    for recipe_name in recipes:
+        print(f" - {recipe_name}")
+
+    # Ask which one to view
+    choice = input("\nEnter the name of the recipe you want to view: ").strip()
+
+    # Check if recipe exists and show ingredients
+    if choice in recipes:
+        print(f"\nIngredients for '{choice}':")
+        for ingredient in recipes[choice]:
+            print(f" - {ingredient}")
+    else:
+        print("\nRecipe not found. Please check the name and try again.")
+
+#-----------------------------------------------TITLE SCREEN-----------------------------------------------------------
+
+# The opening screen will ask the user what they want to do, based on a list of the defined options above
+
+#define a function loop so that the program repeats and the user is taken back to the title menu after completing a chosen function
+def main():
+    while True: #While the loop is true the following will repeat
+        # Print each option on a new line in a numbered list
+        print("\nWelcome! What would you like to do today:")
+        print("1. Find something to cook!")
+        print("2. Add a new recipe to your database.")
+        print("3. View an existing recipe in the database.")
+        print("4. Exit")
+
+        # Ask the user to input their choice from the list above as a number from 1-4
+        option = input("Enter your choice (1-4): ").strip()
+
+        # Use a conditional statement to perform the corresponding function defined above to the users inputed choice (i.e if they input 1, then perform function of option 1)
+        if option == "1":
+            function_find()
+        elif option == "2":
+            function_add()
+        elif option == "3":
+            function_view()
+        elif option == "4":
+            print("Exiting program. Goodbye!")
+            break
+
+        # If a number outside the list is entered, print an error message and ask the user to choose a correct number
+        else:
+            print("Invalid choice. Please enter a number between 1 and 4.")
+
+if __name__ == "__main__":
+    main()
