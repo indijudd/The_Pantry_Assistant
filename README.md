@@ -1,4 +1,4 @@
-The Pantry Assistant
+# The Pantry Assistant
 
 This is a recipe generator text-based program in Python. 
 
@@ -15,4 +15,4 @@ Please note, my program does not require this file to run properly, if the JSON 
 
 When functioning correctly, when running the program the user will be greeted with the following title screen.
 
-<img width="373" height="177" alt="Screenshot 2025-11-11 at 10 14 47 PM" src="https://github.com/user-attachments/assets/96e93f0c-ee54-4aa9-b8b9-160c3f3d365a" /># 
+<img width="373" height="177" alt="Screenshot 2025-11-11 at 10 14 47 PM" src="https://github.com/user-attachments/assets/96e93f0c-ee54-4aa9-b8b9-160c3f3d365a" /> 
